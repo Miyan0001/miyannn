@@ -17,6 +17,7 @@
     "dependencies": {
         "@whiskeysockets/baileys": "6.6.0",
         "@adiwajshing/keyed-db": "^0.2.4",
+        "@distube/ytdl-core": "^4.13.5",
         "@ffmpeg-installer/ffmpeg": "^1.1.0",
         "@hapi/boom": "^10.0.1",
         "anime-wallpaper": "^1.0.2",

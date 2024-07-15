@@ -610,11 +610,11 @@ return arr[Math.floor(Math.random() * arr.length)]
             if (setting) {
                if (!('totalhit' in setting)) setting.totalhit = 0
                if (!('totalError' in setting)) setting.totalError = 0
-               if (!('online' in setting)) setting.online = false 
+               if (!('online' in setting)) setting.online = true 
                if (!('autosticker' in setting)) setting.autosticker = false 
                if (!('autodownload' in setting)) setting.autodownload = false 
                if (!('autobio' in setting)) setting.autobio = false 
-               if (!('autosiby' in setting)) setting.autosiby = false 
+               if (!('autosiby' in setting)) setting.autosiby = true 
                if (!('autoread' in setting)) setting.autoread = false
                if (!('autorecordtype' in setting)) setting.autorecordtype = false
                if (!('autorecord' in setting)) setting.autorecord = false
@@ -629,11 +629,11 @@ return arr[Math.floor(Math.random() * arr.length)]
             } else global.db.data.settings[botNumber] = {
                totalhit: 0,
                totalError: 0,
-               online: false,
+               online: true,
                autosticker: false,
                autodownload: false,
                autobio: false,
-               autosiby: false,
+               autosiby: true,
                autoread: false,
                autoblocknum: false,
                onlyindia: false,
@@ -958,9 +958,10 @@ function formatDuration(ms) {
      XeonBotInc.sendMessage(m.chat, { react: { text: "❤️",key: m.key}})
 	}
 
-	if (db.data.settings[botNumber].autobio) {
+	//if (db.data.settings[botNumber].autobio) {
             XeonBotInc.updateProfileStatus(`${botname} Have Been Running For ${runtime(process.uptime())}`).catch(_ => _)
-       }
+
+     //  }
 
         // Grup Only
         if (!m.isGroup && !XeonTheCreator && db.data.settings[botNumber].onlygrub ) {
@@ -978,9 +979,7 @@ function formatDuration(ms) {
             if (m.chat != "120363141024244851@g.us") return
             }
         if (db.data.settings[botNumber].online) {
-        	if (isCommand) {
         	XeonBotInc.sendPresenceUpdate('unavailable', from)
-        }
         }
         if (db.data.settings[botNumber].autoread) {
             XeonBotInc.readMessages([m.key])
@@ -3067,7 +3066,7 @@ if (!XeonTheCreator) return XeonStickOwner()
             case 'tag':
                 if (!m.isGroup) return XeonStickGroup()
                 if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
-                if (!isBotAdmins) return XeonStickBotAdmin()
+                if (!isBotAdmins && !XeonTheCreator) return XeonStickBotAdmin()
                 let me = m.sender
                 let teks = `╚»˙·٠${themeemoji}●♥ Tag All ♥●${themeemoji}٠·˙«╝\n😶 *Tagger :*  @${me.split('@')[0]}\n🌿 *Message : ${q ? q : 'no message'}*\n\n`
                 for (let mem of participants) {
@@ -3146,7 +3145,7 @@ break
             case 'hidetag':
                 if (!m.isGroup) return XeonStickGroup()
                 if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
-                if (!isBotAdmins) return XeonStickBotAdmin()
+                if (!isBotAdmins && !XeonTheCreator) return XeonStickBotAdmin()
                 XeonBotInc.sendMessage(m.chat, {
                     text: q ? q : '',
                     mentions: participants.map(a => a.id)
@@ -3156,8 +3155,8 @@ break
             break
             case 'totag':
                 if (!m.isGroup) return XeonStickGroup()
-                if (!isBotAdmins) return XeonStickBotAdmin()
-                if (!isAdmins) return replygcxeon(mess.admin)
+                if (!isBotAdmins && !XeonTheCreator) return XeonStickBotAdmin()
+                if (!isAdmins && !XeonTheCreator) return replygcxeon(mess.admin)
                 if (!m.quoted) return replygcxeon(`Reply media with caption ${prefix + command}`)
                 XeonBotInc.sendMessage(m.chat, {
                     forward: m.quoted.fakeObj,
@@ -5043,15 +5042,13 @@ let json = JSON.parse(body)
 }
 break
 case'ttslide': case 'tiktokslide':{
-if (!text) return replygcxeon(`Use it by the way ${prefix+command} link|foto keberapa\n\n_Example_\n\n${prefix+command} https://vt.tiktok.com/ZSL36LfEP/|1`)
-const swn = args.join(" ")
-const pcknm = swn.split("|")[0]
-const atnm = swn.split("|")[1] ? swn.split("|")[1] : 1
-const counttt = atnm - 1
+if (!text) return replygcxeon(`Use it by the way ${prefix+command} Link\n\n_Example_\n\n${prefix+command} https://vt.tiktok.com/ZSL36LfEP/`)
 XeonBotInc.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }})
 try{
-let anu = await fetchJson(`https://aemt.me/download/tiktokslide?url=${text}`)
-await XeonBotInc.sendMessage(m.chat, { image: { url: anu.result.images[counttt]}, caption: ``}, {quoted: m})
+let anu = await fetchJson(`https://api.junn4.my.id/download/tiktok?url=${q}`)
+for (let konto in anu.result.content) {
+await XeonBotInc.sendMessage(m.chat, { image: { url: konto}}, {quoted: m})
+}
 await XeonBotInc.sendMessage(m.chat, { react: { text: "☑️",key: m.key,}})   
 }catch (error) {
 await XeonBotInc.sendMessage(m.chat, { react: { text: "✖️",key: m.key,}})   

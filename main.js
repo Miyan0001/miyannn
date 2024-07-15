@@ -212,6 +212,8 @@ try{
             timeyann = moment.tz('Asia/Jakarta').format('HH:mm:ss')
             secyann = moment.tz('Asia/Jakarta').format('HH:mm:ss')
             dateyan = moment.tz('Asia/Jakarta').format('DD/MM/YYYY')
+            bioyann = moment.tz('Asia/Jakarta').format('HH:mm')
+
             }, 1000)
             
 

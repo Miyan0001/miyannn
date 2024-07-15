@@ -15,6 +15,7 @@ global.ytname = "YouTube: Ｍｉｙａｎ" //ur yt chanel name
 global.socialm = "GitHub: Ｍｉｙａｎ" //ur github or insta name
 global.location = "Indonesia, West Java, North Jakarta" //ur location
 
+
 //new
 global.botname = 'Ｍｉｙａｎ' //ur bot name
 global.ownernumber = '6283890667327' //ur owner number
